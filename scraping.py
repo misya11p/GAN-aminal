@@ -26,15 +26,15 @@ dt_now = datetime.datetime.now()  # 現在日時
 dt_date_str = dt_now.strftime('%Y/%m/%d %H:%M')
 print(dt_date_str)
 
-QUERY = '綺麗な鳥'                        # 検索ワード
+QUERY = 'beautiful birds'                        # 検索ワード
 # QUERY = sys.argv[1]
 LIMIT_DL_NUM = 1000                          # ダウンロード数の上限
-SAVE_DIR = './images/bird'                        # 出力フォルダへのパス（フォルダがない場合は自動生成する）
+SAVE_DIR = 'data/images/bird'                        # 出力フォルダへのパス（フォルダがない場合は自動生成する）
 FILE_NAME = 'bird'                          # ファイル名（ファイル名の後ろに０からの連番と拡張子が付く）
 TIMEOUT = 60                                # 要素検索のタイムアウト（秒）
 ACCESS_WAIT = 1                             # アクセスする間隔（秒）
 RETRY_NUM = 3                               # リトライ回数（クリック、requests）
-DRIVER_PATH = '/bin/chromedriver'       # chromedriver.exeへのパス
+# DRIVER_PATH = '/bin/chromedriver'       # chromedriver.exeへのパス
 
 # Chromeをヘッドレスモードで起動
 options = Options()
@@ -60,11 +60,14 @@ driver.get(url)
 tm_geturl = time.time()
 print('Google画像検索ページ取得', f'{tm_geturl - tm_driver:.1f}s')
 
+# print(*dir(driver), sep='\n')
 tmb_elems = driver.find_elements_by_css_selector('#islmp img')
 tmb_alts = [tmb.get_attribute('alt') for tmb in tmb_elems]
 
 count = len(tmb_alts) - tmb_alts.count('')
 print(count)
+
+tmp_count = count
 
 while count < LIMIT_DL_NUM:
     # ページの一番下へスクロールして新しいサムネイル画像を表示させる
@@ -76,6 +79,9 @@ while count < LIMIT_DL_NUM:
     tmb_alts = [tmb.get_attribute('alt') for tmb in tmb_elems]
 
     count = len(tmb_alts) - tmb_alts.count('')
+    if tmp_count == count:
+        break
+    tmp_count = count
     print(count)  
 
 # サムネイル画像をクリックすると表示される領域を取得
