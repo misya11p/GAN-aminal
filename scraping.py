@@ -34,7 +34,7 @@ FILE_NAME = 'bird'                          # ファイル名（ファイル名�
 TIMEOUT = 60                                # 要素検索のタイムアウト（秒）
 ACCESS_WAIT = 1                             # アクセスする間隔（秒）
 RETRY_NUM = 3                               # リトライ回数（クリック、requests）
-DRIVER_PATH = '/opt/homebrew/bin/chromedriver'       # chromedriver.exeへのパス
+DRIVER_PATH = '/bin/chromedriver'       # chromedriver.exeへのパス
 
 # Chromeをヘッドレスモードで起動
 options = Options()
@@ -44,7 +44,8 @@ options.add_argument('--disable-dev-shm-usage')
 options.add_argument('--start-fullscreen')
 options.add_argument('--disable-plugins')
 options.add_argument('--disable-extensions')
-driver = webdriver.Chrome(DRIVER_PATH, options=options)
+# driver = webdriver.Chrome(DRIVER_PATH, options=options)
+driver = webdriver.Chrome(options=options)
 
 # タイムアウト設定
 driver.implicitly_wait(TIMEOUT)
