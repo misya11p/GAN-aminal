@@ -1,0 +1,7 @@
+{
+    "limit_dl_num": 500,
+    "base_dir": "images/",
+    "timeout": 60,
+    "access_wait": 1,
+    "retry_num": 3
+}
