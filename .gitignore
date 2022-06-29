@@ -1,4 +1,4 @@
-data/images/*
+images/*
 Progressive-GAN-pytorch
 .*
 !.gitignore
