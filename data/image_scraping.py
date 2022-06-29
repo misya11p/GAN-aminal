@@ -22,9 +22,6 @@ dt_now = datetime.datetime.now()  # 現在日時
 dt_date_str = dt_now.strftime('%Y/%m/%d %H:%M')
 print(dt_date_str)
 
-with open('scraping_config.json') as f:
-    config = json.load(f)
-
 # QUERY = 'bird'                        # 検索ワード
 # LIMIT_DL_NUM = 1000                          # ダウンロード数の上限
 # BASE_DIR = 'images/'
@@ -34,6 +31,9 @@ with open('scraping_config.json') as f:
 # ACCESS_WAIT = 1                             # アクセスする間隔（秒）
 # RETRY_NUM = 3                               # リトライ回数（クリック、requests）
 # DRIVER_PATH = '/bin/chromedriver'       # chromedriver.exeへのパス
+
+with open('scraping_config.json') as f:
+    config = json.load(f)
 
 QUERY = sys.argv[1]
 LIMIT_DL_NUM = config['limit_dl_num']
@@ -228,11 +228,11 @@ print(total_str)
 print(count_str)
 
 # urlをファイルへ保存
-path = SAVE_DIR + '/url/' + '_url.txt'
-with open(path, 'w', encoding='utf-8') as f:
-    f.write(dt_date_str + '\n')
-    f.write(total_str + '\n')
-    f.write(count_str + '\n')
-    f.write('\n'.join(url_list))
+# path = SAVE_DIR + '/url/' + '_url.txt'
+# with open(path, 'w', encoding='utf-8') as f:
+#     f.write(dt_date_str + '\n')
+#     f.write(total_str + '\n')
+#     f.write(count_str + '\n')
+#     f.write('\n'.join(url_list))
 
 driver.quit()
