@@ -1,5 +1,6 @@
 images/*
 Progressive-GAN-pytorch
+docs
 .*
 !.gitignore
 !.gitkeep
